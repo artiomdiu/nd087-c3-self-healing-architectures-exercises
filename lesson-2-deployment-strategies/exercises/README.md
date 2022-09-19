@@ -124,7 +124,18 @@
 ## Visualizing Local Kubernetes Cluster
 You may visualize your local kubernetes cluster using the `ops-view` deployment found in the [visual-support](https://github.com/udacity/nd087-c3-self-healing-architectures-exercises/tree/7ff0779bfbc514ca11334bd3912d8d6060e50533/lesson-2-deployment-strategies/exercises/starter/visual-support) directory
 1. `kubectl apply -f visual-support/ops-view.yml`
-1. Visit the URL `http://localhost:30092/` on your browser
+2. Create service account and add permissions:
+   ```
+   kubectl create serviceaccount ops-view
+   kubectl create clusterrolebinding ops-view-binding --clusterrole=cluster-admin --serviceaccount udacity:ops-view
+   ```
+3. Check ops-view.yml whether there are following lines at the end of first section (after restartPolicy) and, if needed, re-apply 1st step:
+   ```
+   serviceAccount: ops-view
+   serviceAccountName: ops-view
+   ```
+4. Visit the URL `http://localhost:30092/` on your browser
+
 
 Remove this deployment using: `kubectl delete -f visual-support/ops-view.yml`
 
